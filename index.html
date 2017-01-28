@@ -1,5 +1,12 @@
 <html>
 <head>
+  <style>
+  body{
+    margin:0;
+    left: 0;
+    top: 0;
+  }
+  </style>
 </head>
 <body>
 <!--map DOM -->
@@ -2249,6 +2256,7 @@
     function somefun() {
         var mapOptions = {
             center: new google.maps.LatLng(markers[0].lat, markers[0].lng)
+            ,styles: [{"featureType":"all","elementType":"geometry.fill","stylers":[{"weight":"2.00"}]},{"featureType":"all","elementType":"geometry.stroke","stylers":[{"color":"#9c9c9c"}]},{"featureType":"all","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#626262"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#ffffff"},{"lightness":"0"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"color":"#f9f6f6"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#e0e0e0"},{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#efefef"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#7b7b7b"}]},{"featureType":"road","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#30bfb7"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#30bfb7"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#070707"}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]}]
             , zoom: 10
             , mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -2261,8 +2269,12 @@
             console.log(data)
             var myLatlng = new google.maps.LatLng(data.lat, data.lng);
             lat_lng.push(myLatlng);
+            var image = {
+              url: 'icon.png',
+            };
             var marker = new google.maps.Marker({
                 position: myLatlng
+                , icon: image
                 , map: map
                 , title: data.description
             });
@@ -2284,7 +2296,8 @@
         //Set the Path Stroke Color
         var poly = new google.maps.Polyline({
             map: map
-            , strokeColor: '#4986E7'
+            , strokeColor: '#20BE8C'
+            , strokeWeight: 1
         });
         //Loop and Draw Path Route between the Points on MAP
         for (var i = 0; i < lat_lng.length; i++) {
